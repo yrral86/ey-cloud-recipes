@@ -81,6 +81,10 @@ if ['solo', 'util'].include?(node[:instance_role])
      command "chown #{node[:owner_name]}:#{node[:owner_name]} -R /data/solr"
    end
 
+   execute "configure_solr" do
+    command "cp -a /data/estrella/current/solr/conf/* /data/solr/solr/conf/"
+   end
+
    execute "monit-reload" do
      command "monit quit && telinit q"
    end
